@@ -18,6 +18,7 @@ using DataFrames
 using CSV
 using ElectronDisplay
 using POMDPs
+#using POMDPModels
 
 using QMDP
 using FIB
@@ -25,7 +26,7 @@ using PointBasedValueIteration
 using SARSOP
 
 
-# include("../feb_1/qmdpSolver.jl")
+include("../problems/tigerProblem.jl")
 
 # --------------------------simulation-----------------------------
 function run_own_sim(package_name, m, policy, n_simulations = 10)
@@ -46,6 +47,7 @@ function run_own_sim(package_name, m, policy, n_simulations = 10)
     local r_total = 0.0
     local d = 1.0
     local counter = 1.0
+    local nstep = 0.0
 
     #  while !isterminal(m, s)
     while counter <= n_simulations
@@ -60,7 +62,9 @@ function run_own_sim(package_name, m, policy, n_simulations = 10)
         d *= discount(m)
         b = update(updater(policy), b, a, o)
         
-        counter +=1
+        if r != -1
+            counter +=1
+        end
         #println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
         #println(s, ([s=>round(pdf(b,s),digits=2) for s in states(m)]), o, a, r)
 
@@ -83,39 +87,28 @@ function run_own_sim(package_name, m, policy, n_simulations = 10)
         end
 
         rsum += r
+        r_total += discount(m)*r
         b1sum += round(pdf(b,"left"),digits=2)
+        nstep +=1
     end
 
-    # --------------------export policy--------------------------
-    old_df =  DataFrame(CSV.File("winter2023/jan_18/tigerProblem_policy.csv"; stringtype=String31))
-
-    df = DataFrame(b1 = b1, b2= b2, action=act)
-    uniq_df = sort(unique(df),[:b1])
-    uniq_df[!,"id"]=collect(1:nrow(uniq_df))
-
-    uniq_df[!,"solver"] = repeat([String31(package_name)], nrow(uniq_df))
-    uniq_df = select!(uniq_df, :solver, :id, Not([:id,:solver]), :b2)
-    # println(uniq_df)
-
-    # CSV.write("winter2023/jan_18/tigerProblem_policy.csv", unique(append!(old_df,uniq_df)))
+    
 
     return n_simulations, b1sum, trunc(Int,rsum), trunc(Int, nlisten),
-             trunc(Int, nleft), trunc(Int,nwrong), trunc(Int, ncorrect)
+    trunc(Int, nleft), trunc(Int,nwrong), trunc(Int, ncorrect), trunc(Int, r_total), trunc(Int, nstep)
 end
 
 function run_solvers()
     # ---------------------------solvers--------------------------------
-    old_df =  DataFrame(
-        CSV.File("winter2023/mar_22/tigerProblem_simulations.csv"; 
-        stringtype=String31))
+    old_df =  DataFrame()
 
 
     solver_dict = Dict(
-        "QMDP_own_solver_penalty50" => qmdpSolver(),
-        "FIB_penalty50" => FIBSolver(),
-        "PBVI_penalty50" => PBVISolver(),
-        "SARSOP_penalty50" => SARSOPSolver(verbose=false),
-        "monahan_own_solver_penalty50" => monahan3Solver(max_iterations=20)
+        "QMDP" => QMDPSolver(),
+        "FIB" => FIBSolver(),
+        "PBVI" => PBVISolver(),
+        "SARSOP" => SARSOPSolver(verbose=false)
+        
         )
 
     #=
@@ -135,28 +128,32 @@ function run_solvers()
             local policy = solve(solver, m)
             # print(policy.alphas)
             
-            local n_simulations, b1sum,rsum, nlisten, nleft, nwrong, ncorrect,r_total = run_sim(package_name, m, policy, 1000)
-
+            local n_simulations, b1sum,rsum, nlisten, nleft, nwrong, ncorrect,r_total,n_step = run_own_sim(package_name, m, policy, 1000)
+            
+            # time taken to execute a given expression or function, in seconds
+            local elapsed_time = @elapsed run_own_sim(package_name, m, policy, 1000)
             # -----------------record test result--------------------------
             df = DataFrame(id = i, package = String31(package_name), 
-                            n_simulations = n_simulations, 
-                            b1_avg = round(b1sum/n_simulations,digits=2), 
-                            b2_avg= round((n_simulations-b1sum)/n_simulations, digits=2), 
-                            sum_reward=rsum, 
-                            sum_discount_reward = r_total,
-                            num_listen=nlisten, num_left = nleft, num_right = n_simulations-nlisten-nleft,
-                            num_correct_door = ncorrect, num_wrong_door = nwrong)
+                        n_games = n_simulations, 
+                        b1_avg = round(b1sum/n_step,digits=2), 
+                        b2_avg= round((n_step-b1sum)/n_step, digits=2), 
+                        sum_reward=rsum, 
+                        sum_discount_reward = r_total,
+                        num_listen=nlisten, num_left = nleft, num_right = n_step-nlisten-nleft,
+                        num_correct_door = ncorrect, num_wrong_door = nwrong,
+                        avg_steps_per_game = n_step/n_simulations,
+                        runtime = elapsed_time)
 
             append!(old_df,df)
             
-            #CSV.write("tigerProblem_policy.csv",uniq_df)
+
         end
     end
 
-    CSV.write("winter2023/mar_22/tigerProblem_simulations.csv", old_df)
+    CSV.write(pwd()*"/results/tigerProblem.csv", old_df)
     println("done!")
     #println(old_df)
 end
 
 
-run
+run_solvers()

@@ -1,9 +1,8 @@
-# Empirical Analysis of Built-In POMDP.jl Algorithms: A Comparative Study
+# Empirical Analysis of Built-In POMDPs.jl Algorithms: A Comparative Study
 
 In this study, we aim to perform an empirical analysis of multiple algorithms using the package [POMDPs.jl](https://github.com/JuliaPOMDP/POMDPs.jl) and examine the performance of each algorithm.
 
 This study is part of DS8010 -Interactive Learning in Decision Process course project, Winter 2023 term. Details about the course can be found [here](https://www.torontomu.ca/graduate/datascience/courses/).
-
 
 # POMDP Problems
 
@@ -11,7 +10,7 @@ This study is part of DS8010 -Interactive Learning in Decision Process course pr
 2. Tiger problem
 3. Paint problem
 4. Query problem
-5. Mini hallwayproblem
+5. Mini hallway problem
 6. Rock problem
 7. Simple grid world problem
 8. Maze problem
@@ -28,7 +27,6 @@ We solve the above POMDP problem using the algorithms listed below:
 6. Fast Informed Bound (FIB)
 7. Point-Based Value Iteration (PBVI)
 
-
 # Outcomes
 
 Results of the experiments can be found in result folder
@@ -39,12 +37,12 @@ Results of the experiments can be found in result folder
 - Intermediate report can be found here:
 - Final complete report can be found here:
 
-
 # Timeline
 
 - [ ] Timeline•Week 1-2 (March 13-26)
   - [ ] Review relevant literature on POMDPs and their algorithms
   - [ ] Prepare the POMDPs problems (crying baby, paint problem, query problem)for evaluationand evaluate the performance of each algorithm on the selected POMDPs problems
+  - [ ] diagrams to explain the problem, architecture of the algorithm
 - [ ] Week 3-4 (March 27-April 9)
   - [ ] Review relevant literature on POMDPs and their algorithms, and complete intermediatereport (introduction, literature review, methods section) which is due **April 10**
   - [ ] Prepare the POMDPs problems (simple grid world problem/ maze problem) and evaluatethe performance of each algorithm on the selected POMDPs problems
@@ -53,8 +51,6 @@ Results of the experiments can be found in result folder
   - [ ] Draft the research report (experimental setup, results, conclusions)
 - [ ] Week 7 (April 24-26)
   - [ ] Review and finalize the research report, submit the research report by thedue date of **April 26**
-
-
 
 # Reference
 
