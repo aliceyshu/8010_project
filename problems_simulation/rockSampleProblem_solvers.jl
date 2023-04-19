@@ -36,9 +36,7 @@ include("../problems/rockSampleProblem.jl")
 function run_rock_sim(package_name, m, policy, n_simulations = 10)
     local rsum = 0
     
-    local b1 = Vector{Float64}()
-    local b2 = Vector{Float64}()
-    local act = Vector{Int64}()
+
 
     # run a simulation of our model using the stepthrough function
     local b = initialize_belief(updater(policy), initialstate(m))
@@ -62,16 +60,15 @@ function run_rock_sim(package_name, m, policy, n_simulations = 10)
         d *= discount(m)
         b = update(updater(policy), b, a, o)
         
-        if r==-5.0 || r===15.0
+        if r == 15
             counter +=1
+            println(".",s)
+            b = initialize_belief(updater(policy), initialstate(m))
+            s = rand(initialstate(m))
         end
-        # println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
+        #println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
         #println(s, ([s=>round(pdf(b,s),digits=2) for s in states(m)]), o, a, r)
 
-        # store belief and action inex
-        #push!(b1, round(pdf(b,"left"),digits=2))
-        #push!(b2, round(pdf(b,"right"),digits=2))
-        #push!(act, actionindex(m,a))
         
 
         rsum += r
@@ -94,8 +91,8 @@ function run_rock_solvers()
         "POMCP" => POMCPSolver(tree_queries=100, rng=MersenneTwister(123), default_action = 1),
         "POMCPOW" => POMCPOWSolver(tree_queries=100, default_action = 1),
         #"QMDP" => QMDPSolver(),
-        "FIB" => FIBSolver(),
-        "PBVI" => PBVISolver(),
+        #"FIB" => FIBSolver(),
+        #"PBVI" => PBVISolver(),
         "SARSOP" => SARSOPSolver(precision=1e-3, verbose = false),
         #"IP" =>  PruneSolver(),
         
@@ -110,9 +107,9 @@ function run_rock_solvers()
         for i in 1:10
             println("round $i")
             
-            local m = RockPOMDP{1}(
+            local m = RockPOMDP{2}(
                 map_size = (3,3),
-                rocks_positions=[(2,2)], 
+                rocks_positions=[(2,2),(1,2)], 
                 init_pos = (1,1),
                 sensor_efficiency=20.0,
                 discount_factor=0.95, 
