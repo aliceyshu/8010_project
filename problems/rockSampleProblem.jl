@@ -49,7 +49,7 @@ end
     good_rock_reward::Float64 = 10.
     step_penalty::Float64 = 0.
     sensor_use_penalty::Float64 = 0.
-    exit_reward::Float64 = 10.
+    exit_reward::Float64 = 15.
     terminal_state::RSState{K} = RSState(RSPos(-1,-1),
                                          SVector{length(rocks_positions),Bool}(falses(length(rocks_positions))))
     # Some special indices for quickly retrieving the stateindex of any state
