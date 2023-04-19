@@ -11,9 +11,9 @@ This study is part of DS8010 -Interactive Learning in Decision Process course pr
 3. Paint problem
 4. Query problem
 5. Mini hallway problem
-6. Rock problem
+6. Rock sample problem
 7. Simple grid world problem
-8. Maze problem
+8. T-Maze problem
 
 # Algorithm
 
@@ -22,7 +22,7 @@ We solve the above POMDP problem using the algorithms listed below:
 1. Incremental Pruning (IP)
 2. QMDP
 3. Successive Approx-imations of the Reachable Space under Optimal Policies(SARSOP)
-4. Partially Observable Monte CarloPlanning (POMCP)
+4. Partially Observable Monte Carlo Planning (POMCP)
 5. POMCP with observation widening (POMCPOW)
 6. Fast Informed Bound (FIB)
 7. Point-Based Value Iteration (PBVI)
@@ -39,13 +39,13 @@ Results of the experiments can be found in result folder
 
 # Timeline
 
-- [ ] Timeline•Week 1-2 (March 13-26)
-  - [ ] Review relevant literature on POMDPs and their algorithms
+- [X] Timeline•Week 1-2 (March 13-26)
+  - [X] Review relevant literature on POMDPs and their algorithms
   - [ ] Prepare the POMDPs problems (crying baby, paint problem, query problem)for evaluationand evaluate the performance of each algorithm on the selected POMDPs problems
-  - [ ] diagrams to explain the problem, architecture of the algorithm
-- [ ] Week 3-4 (March 27-April 9)
-  - [ ] Review relevant literature on POMDPs and their algorithms, and complete intermediatereport (introduction, literature review, methods section) which is due **April 10**
-  - [ ] Prepare the POMDPs problems (simple grid world problem/ maze problem) and evaluatethe performance of each algorithm on the selected POMDPs problems
+  - [X] diagrams to explain the problem, architecture of the algorithm
+- [X] Week 3-4 (March 27-April 9)
+  - [X] Review relevant literature on POMDPs and their algorithms, and complete intermediatereport (introduction, literature review, methods section) which is due **April 10**
+  - [X] Prepare the POMDPs problems (simple grid world problem/ maze problem) and evaluatethe performance of each algorithm on the selected POMDPs problems
 - [ ] Week 5-6 (April 10-23)
   - [ ] Prepare the remaining POMDPs problems (simple grid world problem/ maze problem) andevaluate the performance of each algorithm on the selected POMDPs problems
   - [ ] Draft the research report (experimental setup, results, conclusions)

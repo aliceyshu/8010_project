@@ -24,11 +24,13 @@ using QMDP
 using FIB
 using PointBasedValueIteration
 using SARSOP
-
-
+using IncrementalPruning
+using BasicPOMCP
+using POMCPOW
+using Random
 
 # --------------------------simulation-----------------------------
-function run_own_sim(package_name, m, policy, n_simulations = 10)
+function run_baby_sim(package_name, m, policy, n_simulations = 10)
     local rsum = 0
     
     local b1 = Vector{Float64}()
@@ -43,10 +45,6 @@ function run_own_sim(package_name, m, policy, n_simulations = 10)
     local r_total = 0.0
     local counter = 1.0
     local nstep = 0.0
-
-    local nfeed = 0.0
-    local nhungry = 0.0
-    local ncrying= 0.0
 
     #  while !isterminal(m, s)
     while counter <= n_simulations
@@ -71,21 +69,6 @@ function run_own_sim(package_name, m, policy, n_simulations = 10)
         #push!(b1, round(pdf(b,"left"),digits=2))
         #push!(b2, round(pdf(b,"right"),digits=2))
         #push!(act, actionindex(m,a))
-
-        # count number of time open the wrong door
-        
-        if r ==-15.0
-            nfeed += 1
-            nhungry +=1
-        elseif  r==-5.0
-            nfeed += 1
-        elseif  r==-10.0
-            nhungry += 1
-        end
-
-        if o == true
-            ncrying += 1
-        end
         
 
         rsum += r
@@ -96,32 +79,32 @@ function run_own_sim(package_name, m, policy, n_simulations = 10)
 
     
 
-    return n_simulations, trunc(Int,rsum),  trunc(Int, r_total), trunc(Int, nstep), trunc(Int, nfeed),trunc(Int, nhungry), trunc(Int, ncrying)
+    return n_simulations, trunc(Int,rsum),  trunc(Int, r_total), trunc(Int, nstep)
 end
 
-function run_solvers()
+function run_baby_solvers()
     # ---------------------------solvers--------------------------------
     old_df =  DataFrame()
 
 
     solver_dict = Dict(
+        "POMCP" => POMCPSolver(tree_queries=100, rng=MersenneTwister(123)),
+        "POMCPOW" => POMCPOWSolver(tree_queries=100),
         "QMDP" => QMDPSolver(),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),
-        "SARSOP" => SARSOPSolver(verbose=false)
+        "SARSOP" => SARSOPSolver(precision=1e-3, verbose = false),
+        #"IP" =>  PruneSolver(),
         
         )
-
     #=
-    solver_dict =  Dict(
-        "monahan_own_solver" => monahanSolver(max_iterations=10)
-        )
+        
     =#
 
     println("begin...")
     for (package_name, def_solver) in solver_dict
         println(package_name)
-        for i in 1:100
+        for i in 1:10
             println("round $i")
             
             local m = BabyPOMDP()
@@ -129,18 +112,17 @@ function run_solvers()
             local policy = solve(solver, m)
             # print(policy.alphas)
             
-            local n_simulations, rsum, r_total,n_step, nfeed, nhungry, ncrying = run_own_sim(package_name, m, policy, 1000)
+            local n_simulations, rsum, r_total,n_step = run_baby_sim(package_name, m, policy, 1000)
             
             # time taken to execute a given expression or function, in seconds
-            local elapsed_time = @elapsed run_own_sim(package_name, m, policy, 1000)
+            local elapsed_time = @elapsed run_baby_sim(package_name, m, policy, 1000)
             # -----------------record test result--------------------------
             df = DataFrame(id = i, package = String31(package_name), 
                         n_games = n_simulations, 
                         sum_reward=rsum, 
                         sum_discount_reward = r_total,
                         avg_steps_per_game = n_step/n_simulations,
-                        runtime = elapsed_time,
-                        n_feed = nfeed, n_hungry=nhungry, n_crying = ncrying)
+                        runtime = elapsed_time)
 
             append!(old_df,df)
             
@@ -154,4 +136,4 @@ function run_solvers()
 end
 
 
-run_solvers()
+run_baby_solvers()
