@@ -19,6 +19,7 @@ using CSV
 using ElectronDisplay
 using POMDPs
 using POMDPModels
+using POMDPTools
 
 using QMDP
 using FIB
@@ -89,7 +90,7 @@ function run_baby_solvers()
 
     solver_dict = Dict(
         "POMCP" => POMCPSolver(tree_queries=100, rng=MersenneTwister(123)),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100),
+        "POMCPOW" => POMCPOWSolver(tree_queries=100, criterion=MaxUCB(20.0)),
         "QMDP" => QMDPSolver(),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),

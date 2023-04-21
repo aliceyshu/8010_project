@@ -18,22 +18,22 @@ using DataFrames
 using CSV
 using ElectronDisplay
 using POMDPs
-#using POMDPModels
+using POMDPModels
 
 using QMDP
 using FIB
 using PointBasedValueIteration
 using SARSOP
-#using IncrementalPruning
+using IncrementalPruning
 using BasicPOMCP
 using POMCPOW
 using Random
 
 
-include("../problems/tigerProblem.jl")
+#include("../problems/tigerProblem.jl")
 
 # --------------------------simulation-----------------------------
-function run_tiger_sim(package_name, m, policy, n_simulations = 10)
+function run_tiger_sim(package_name, m, policy, n_simulations = 10, p=false)
 
     # run a simulation of our model using the stepthrough function
     local b = initialize_belief(updater(policy), initialstate(m))
@@ -51,23 +51,31 @@ function run_tiger_sim(package_name, m, policy, n_simulations = 10)
         end
 
         a = action(policy, b)
-        s, o, r = @gen(:sp,:o,:r)(m, s, a)
+        s,o,r = @gen(:sp, :o, :r)(m, s, a)
+        # println(s,a,o,r)
 
+        
+        if p == true
+            #const TIGER_LEFT = false
+            #const TIGER_RIGHT = true
+            # listen=0,open left=1, open right = 2
+            println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
+            #println(s, ([s=>round(pdf(b,s),digits=2) for s in states(m)]), o, a, r)
+        end
+        
         r_total += d*r
+        rsum += r
         d *= discount(m)
+        r_total += discount(m)*r
         b = update(updater(policy), b, a, o)
         
+
+        nstep +=1
         if r != -1
             counter +=1
+            b=initialize_belief(updater(policy), initialstate(m))
+            println([s=>round(pdf(b,s),digits=2) for s in states(m)])
         end
-        #println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
-        #println(s, ([s=>round(pdf(b,s),digits=2) for s in states(m)]), o, a, r)
-
-        
-
-        rsum += r
-        r_total += discount(m)*r
-        nstep +=1
     end
 
     
@@ -75,18 +83,18 @@ function run_tiger_sim(package_name, m, policy, n_simulations = 10)
     return n_simulations, trunc(Int,rsum), trunc(Int, r_total), trunc(Int, nstep)
 end
 
-function run_tiger_solvers()
+function run_tiger_solvers( p, n_sim = 1000)
     # ---------------------------solvers--------------------------------
     old_df =  DataFrame()
 
 
     solver_dict = Dict(
-        "POMCP" => POMCPSolver(tree_queries=100, rng=MersenneTwister(123)),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100),
-        "QMDP" => QMDPSolver(),
-        "FIB" => FIBSolver(),
-        "PBVI" => PBVISolver(),
-        "SARSOP" => SARSOPSolver(precision=1e-3, verbose = false),
+        "POMCP" => POMCPSolver(tree_queries=1000),
+        #"POMCPOW" => POMCPOWSolver(tree_queries=100, criterion=MaxUCB(20.0)),
+        #"QMDP" => QMDPSolver(),
+        #"FIB" => FIBSolver(),
+        #"PBVI" => PBVISolver(),
+        #"SARSOP" => SARSOPSolver(precision=1e-3, verbose = false),
         #"IP" => PruneSolver(),
         
         )
@@ -104,10 +112,10 @@ function run_tiger_solvers()
             local policy = solve(solver, m)
             # print(policy.alphas)
             
-            local n_simulations,rsum, r_total,n_step = run_tiger_sim(package_name, m, policy, 1000)
+            local n_simulations,rsum, r_total,n_step = run_tiger_sim(package_name, m, policy, n_sim,p)
             
             # time taken to execute a given expression or function, in seconds
-            local elapsed_time = @elapsed run_tiger_sim(package_name, m, policy, 1000)
+            local elapsed_time = @elapsed run_tiger_sim(package_name, m, policy, n_sim,p)
             # -----------------record test result--------------------------
             df = DataFrame(id = i, package = String31(package_name), 
                         n_games = n_simulations, 
@@ -115,17 +123,17 @@ function run_tiger_solvers()
                         sum_discount_reward = r_total,
                         avg_steps_per_game = n_step/n_simulations,
                         runtime = elapsed_time)
-
+            println(rsum)
             append!(old_df,df)
             
 
         end
     end
 
-    CSV.write(pwd()*"/results/tigerProblem.csv", old_df)
+    #CSV.write(pwd()*"/results/tigerProblem.csv", old_df)
     println("done!")
     #println(old_df)
 end
 
 
-run_tiger_solvers()
+run_tiger_solvers(true, 20)
