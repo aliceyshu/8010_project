@@ -33,9 +33,9 @@ Results of the experiments can be found in result folder
 
 # Report
 
-- Project Proposal can be found here:
-- Intermediate report can be found here:
-- Final complete report can be found here:
+- Project Proposal can be found here: [link](https://github.com/aliceyshu/8010_project/blob/main/DS8010_Yang_Research_Proposal.pdf)
+- Intermediate report can be found here: [link](https://github.com/aliceyshu/8010_project/blob/main/DS8010_Project_Report_Yang_Part1.pdf)
+- Final complete report can be found here: [link]()
 
 # Timeline
 
