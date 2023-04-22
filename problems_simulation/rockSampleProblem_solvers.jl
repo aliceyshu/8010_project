@@ -11,6 +11,7 @@ Pkg.add("QMDP")
 Pkg.add("FIB")
 Pkg.add("PointBasedValueIteration")
 Pkg.add("SARSOP")
+#Pkg.add(PackageSpec(name="IncrementalPruning", version="0.2.0"))
 =#
 
 using JLD2
@@ -20,6 +21,8 @@ using ElectronDisplay
 using POMDPs
 #using POMDPModels
 using RockSample
+using ParticleFilters
+using POMDPLinter:@POMDP_require
 
 using QMDP
 using FIB
@@ -33,19 +36,27 @@ using Random
 
 #include("../problems/rockSampleProblem.jl")
 
+
+
 # --------------------------simulation-----------------------------
 function run_rock_sim(package_name, m, policy, n_simulations = 10,p=false)
-    local rsum = 0
     
-
+    function u(policy,m)
+        if package_name == "POMCP" || package_name == "POMCPOW"
+            return BootstrapFilter(m,10)
+        else
+            return updater(policy)
+        end
+    end
 
     # run a simulation of our model using the stepthrough function
-    local b = initialize_belief(updater(policy), initialstate(m))
+    local rsum = 0
+    local b = initialize_belief(u(policy,m), initialstate(m))
     local s = rand(initialstate(m))
     local d = 1.0
 
     local r_total = 0.0
-    local counter = 1.0
+    local counter = 0.0
     local nstep = 0.0
 
     #  while !isterminal(m, s)
@@ -57,9 +68,10 @@ function run_rock_sim(package_name, m, policy, n_simulations = 10,p=false)
         a = action(policy, b)
         s, o, r = @gen(:sp,:o,:r)(m, s, a)
 
-        r_total += d*r
+        rsum += r
         d *= discount(m)
-        b = update(updater(policy), b, a, o)
+        r_total += d*r
+        b = update(u(policy,m), b, a, o)
         
         # we want to stop iteration after 1000 steps, some solver does not work well with rock RockSample
         # usually they will keep move forward and and have total reward of 0 (though 
@@ -79,8 +91,7 @@ function run_rock_sim(package_name, m, policy, n_simulations = 10,p=false)
         end
         
 
-        rsum += r
-        r_total += discount(m)*r
+        
 
         nstep +=1
         #print(nstep)
@@ -96,19 +107,17 @@ function run_rock_solvers(p=false,n_sim=1000,n_round=10)
     old_df =  DataFrame()
 
 
+    
     solver_dict = Dict(
-        #"POMCP" => POMCPSolver(tree_queries=100, rng=MersenneTwister(123), default_action = 1),
-        #"POMCPOW" => POMCPOWSolver(tree_queries=100, default_action = 1),
+        "POMCP" => POMCPSolver(tree_queries=100, default_action = 1),
+        "POMCPOW" => POMCPOWSolver(tree_queries=100, default_action = 1),
         "QMDP" => QMDPSolver(max_iterations=20,belres=1e-3),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),
         "SARSOP" => SARSOPSolver(precision=1e-3, verbose = false),
-        # "IP" =>  PruneSolver(),
+        #"IP" =>  PruneSolver(),
         
         )
-    #=1000
-        
-    =#
 
     println("begin...")
     for (package_name, def_solver) in solver_dict
@@ -161,5 +170,5 @@ function run_rock_solvers(p=false,n_sim=1000,n_round=10)
     #println(old_df)
 end
 
-
+# print or not, how many games, repeat for how many times
 run_rock_solvers(false, 1000,10)

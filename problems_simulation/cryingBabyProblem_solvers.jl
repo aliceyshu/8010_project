@@ -20,6 +20,8 @@ using ElectronDisplay
 using POMDPs
 using POMDPModels
 using POMDPTools
+using ParticleFilters
+using POMDPLinter:@POMDP_require
 
 using QMDP
 using FIB
@@ -31,9 +33,17 @@ using POMCPOW
 using Random
 
 # --------------------------simulation-----------------------------
-function run_baby_sim(package_name, m, policy, n_simulations = 10)
+function run_baby_sim(package_name, m, policy, n_simulations = 10,p=false)
+
+    function u(policy,m)
+        if package_name == "POMCP" || package_name == "POMCPOW"
+            return BootstrapFilter(m,10)
+        else
+            return updater(policy)
+        end
+    end
+
     local rsum = 0
-    
     local b1 = Vector{Float64}()
     local b2 = Vector{Float64}()
     local act = Vector{Int64}()
@@ -56,24 +66,20 @@ function run_baby_sim(package_name, m, policy, n_simulations = 10)
         a = action(policy, b)
         s, o, r = @gen(:sp,:o,:r)(m, s, a)
 
-        r_total += d*r
+        rsum += r
         d *= discount(m)
-        b = update(updater(policy), b, a, o)
+        r_total += d*r
+        b = update(u(policy,m), b, a, o)
         
         if r==-5.0 || r===15.0
             counter +=1
         end
-        # println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
-        #println(s, ([s=>round(pdf(b,s),digits=2) for s in states(m)]), o, a, r)
 
-        # store belief and action inex
-        #push!(b1, round(pdf(b,"left"),digits=2))
-        #push!(b2, round(pdf(b,"right"),digits=2))
-        #push!(act, actionindex(m,a))
+        if p==true
+            println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
+            #println(s, ([s=>round(pdf(b,s),digits=2) for s in states(m)]), o, a, r)
+        end
         
-
-        rsum += r
-        r_total += discount(m)*r
 
         nstep +=1
     end
@@ -83,7 +89,7 @@ function run_baby_sim(package_name, m, policy, n_simulations = 10)
     return n_simulations, trunc(Int,rsum),  trunc(Int, r_total), trunc(Int, nstep)
 end
 
-function run_baby_solvers()
+function run_baby_solvers(p=false,n_sim=1000,n_round=10)
     # ---------------------------solvers--------------------------------
     old_df =  DataFrame()
 
@@ -105,7 +111,7 @@ function run_baby_solvers()
     println("begin...")
     for (package_name, def_solver) in solver_dict
         println(package_name)
-        for i in 1:10
+        for i in 1:n_round
             println("round $i")
             
             local m = BabyPOMDP()
@@ -113,10 +119,10 @@ function run_baby_solvers()
             local policy = solve(solver, m)
             # print(policy.alphas)
             
-            local n_simulations, rsum, r_total,n_step = run_baby_sim(package_name, m, policy, 1000)
+            local n_simulations, rsum, r_total,n_step = run_baby_sim(package_name, m, policy, n_sim,p)
             
             # time taken to execute a given expression or function, in seconds
-            local elapsed_time = @elapsed run_baby_sim(package_name, m, policy, 1000)
+            local elapsed_time = @elapsed run_baby_sim(package_name, m, policy, n_sim,p)
             # -----------------record test result--------------------------
             df = DataFrame(id = i, package = String31(package_name), 
                         n_games = n_simulations, 
@@ -136,5 +142,5 @@ function run_baby_solvers()
     #println(old_df)
 end
 
-
-run_baby_solvers()
+# print or not, how many games, repeat for how many times
+run_baby_solvers(false,1000,10)
