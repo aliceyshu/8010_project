@@ -1,9 +1,9 @@
 using LinearAlgebra
 using POMDPs
 using POMDPTools
-#using StaticArrays
+using StaticArrays
 using Parameters
-#using Random
+using Random
 using Compose
 using Combinatorics
 using DiscreteValueIteration
@@ -11,8 +11,8 @@ using ParticleFilters           # used in heuristics
 using POMDPModelChecking
 
 @with_kw struct TMazeState
-    x::Int64 = 1 # position in corridor
-    g::Symbol = :north# goal north or south
+    x::Int64  # position in corridor
+    g::Symbol # goal north or south
 end
 
 @with_kw struct TMaze <: POMDP{Union{TMazeState,TerminalState}, Int64, Int64}
@@ -85,6 +85,7 @@ function reward(m::TMaze, s::TMazeState, a::Int64)
         return 0.0
     end
 end
+reward(pomdp::TMaze, s::Bool, a::Int64, sp::Bool) = reward(pomdp, s, a)
 
 # observation mapping
 #    1      2        3         4         5

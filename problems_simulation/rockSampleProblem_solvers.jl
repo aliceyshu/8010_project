@@ -34,10 +34,6 @@ using POMCPOW
 using Random
 
 
-#include("../problems/rockSampleProblem.jl")
-
-
-
 # --------------------------simulation-----------------------------
 function run_rock_sim(package_name, m, policy, n_simulations = 10,p=false)
     
