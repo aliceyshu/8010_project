@@ -1,3 +1,0 @@
-id,package,n_games,sum_reward,sum_discount_reward,avg_steps_per_game,runtime
-1,POMCP,10,25,13,10.4,2.4803176
-1,POMCPOW,10,19,11,11.6,6.189517

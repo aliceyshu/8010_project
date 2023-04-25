@@ -72,7 +72,7 @@ function run_tMaze_sim(package_name, m, policy, n_simulations = 10,p=false)
 
     local d = 1.0
     local r_total = 0.0
-    local counter = 0.0
+    local counter = 1.0
     local nstep = 0.0
 
     #  while !isterminal(m, s)
@@ -171,7 +171,9 @@ function run_tMaze_solvers(p=false,n_sim=1000,n_round=10)
         end
     end
     
-    CSV.write(pwd()*"/results/tMazeSampleProblem.csv", old_df)
+    if p==false && n_sim ==1000
+        CSV.write(pwd()*"/results/tMazeProblem.csv", old_df)
+    end
     
     println("done!")
     #println(old_df)

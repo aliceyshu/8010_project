@@ -52,8 +52,9 @@ function run_rock_sim(package_name, m, policy, n_simulations = 10,p=false)
     local d = 1.0
 
     local r_total = 0.0
-    local counter = 0.0
+    local counter = 1.0
     local nstep = 0.0
+    local n=0.0
 
     #  while !isterminal(m, s)
     while counter <= n_simulations
@@ -73,8 +74,9 @@ function run_rock_sim(package_name, m, policy, n_simulations = 10,p=false)
         # usually they will keep move forward and and have total reward of 0 (though 
         # they might find a rock by chance, this happens rarely)
         # to avoid this, we set this limitation of stop current game after 1000 steps
-        if (r == 20) || mod(nstep,1000)==0
+        if (r == 20) || n==100
             counter +=1
+            n=0.0
             #println(".")
             b = initialize_belief(updater(policy), initialstate(m))
             s = rand(initialstate(m))
@@ -88,7 +90,7 @@ function run_rock_sim(package_name, m, policy, n_simulations = 10,p=false)
         
 
         
-
+        n+=1
         nstep +=1
         #print(nstep)
     end
@@ -161,7 +163,9 @@ function run_rock_solvers(p=false,n_sim=1000,n_round=10)
         end
     end
 
-    CSV.write(pwd()*"/results/rockSampleProblem.csv", old_df)
+    if p==false && n_sim ==1000
+        CSV.write(pwd()*"/results/rockSampleProblem.csv", old_df)
+    end
     println("done!")
     #println(old_df)
 end

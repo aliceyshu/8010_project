@@ -21,7 +21,7 @@ using ElectronDisplay
 using POMDPs
 #using POMDPModels
 using ParticleFilters
-using POMDPLinter:@POMDP_require
+using Parameters
 
 using QMDP
 using FIB
@@ -32,7 +32,7 @@ using BasicPOMCP
 using POMCPOW
 using Random
 
-
+include("../problems/queryProblem.jl")
 # --------------------------simulation-----------------------------
 function run_query_sim(package_name, m, policy, n_simulations = 10,p=false)
     
@@ -51,17 +51,20 @@ function run_query_sim(package_name, m, policy, n_simulations = 10,p=false)
     local d = 1.0
 
     local r_total = 0.0
-    local counter = 0.0
+    local counter = 1.0
     local nstep = 0.0
+    local n = 0.0
+
+    if p==true
+        println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)])")
+    end
 
     #  while !isterminal(m, s)
     while counter <= n_simulations
-        if mod(counter,10) == 0
-            #println(counter)
-        end
 
         a = action(policy, b)
-        s, o, r = @gen(:sp,:o,:r)(m, s, a)
+        s, o, r = @gen(:sp, :o, :r)(m, s, a)
+        r = reward(m,s,a,o)
 
         rsum += r
         d *= discount(m)
@@ -71,7 +74,7 @@ function run_query_sim(package_name, m, policy, n_simulations = 10,p=false)
 
 
         if p==true
-            println("state: $s, action: $a, obs: $o, reward:$r")
+            println("state: $s, belief: $([s=>round(pdf(b,s),digits=2) for s in states(m)]), action: $a, obs: $o, reward:$r")
         #println(s, ([s=>round(pdf(b,s),digits=2) for s in states(m)]), o, a, r)
         end
 
@@ -80,15 +83,17 @@ function run_query_sim(package_name, m, policy, n_simulations = 10,p=false)
         # usually they will keep move forward and and have total reward of 0 (though 
         # they might find a query by chance, this happens rarely)
         # to avoid this, we set this limitation of stop current game after 1000 steps
-        if (r == 20) || mod(nstep,1000)==0
+        if (r == 0) || n ==100
             counter +=1
-            #println(".")
+            n = 0
             b = initialize_belief(updater(policy), initialstate(m))
             s = rand(initialstate(m))
+            #println(".")
         end
         #counter+=1
 
 
+        n +=1
         nstep +=1
         #print(nstep)
     end
@@ -105,8 +110,8 @@ function run_query_solvers(p=false,n_sim=1000,n_round=10)
 
     
     solver_dict = Dict(
-        "POMCP" => POMCPSolver(tree_queries=100, default_action = 1),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100, default_action = 1),
+        "POMCP" => POMCPSolver(tree_queries=100),
+        "POMCPOW" => POMCPOWSolver(tree_queries=100),
         "QMDP" => QMDPSolver(max_iterations=20,belres=1e-3),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),
@@ -123,7 +128,7 @@ function run_query_solvers(p=false,n_sim=1000,n_round=10)
             
 
             local m=QueryPOMDP()
-                
+
             local solver = def_solver
             local policy = solve(solver, m)
             # print(policy.alphas)
@@ -146,11 +151,13 @@ function run_query_solvers(p=false,n_sim=1000,n_round=10)
         end
     end
 
-    CSV.write(pwd()*"/results/querySampleProblem.csv", old_df)
+    if p==false && n_sim ==1000
+        CSV.write(pwd()*"/results/queryProblem.csv", old_df)
+    end
     println("done!")
     #println(old_df)
 end
 
 # print or not, how many games, repeat for how many times
-run_query_solvers(true, 10,1)
-# run_query_solvers(false, 1000,10)
+# run_query_solvers(true, 10,1)
+run_query_solvers(false, 1000,10)

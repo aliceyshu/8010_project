@@ -137,7 +137,9 @@ function run_baby_solvers(p=false,n_sim=1000,n_round=10)
         end
     end
 
-    CSV.write(pwd()*"/results/cryingBabyProblem.csv", old_df)
+    if p==false && n_sim ==1000
+        CSV.write(pwd()*"/results/cryingBabyProblem.csv", old_df)
+    end
     println("done!")
     #println(old_df)
 end

@@ -133,7 +133,9 @@ function run_hallway_solvers(p=false, n_sim=1000,n_repeat=10)
         end
     end
 
-    CSV.write(pwd()*"/results/miniHallwayProblem.csv", old_df)
+    if p==false && n_sim ==1000
+        CSV.write(pwd()*"/results/miniHallwayProblem.csv", old_df)
+    end
     println("done!")
     #println(old_df)
 end

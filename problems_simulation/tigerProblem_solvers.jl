@@ -53,6 +53,7 @@ function run_tiger_sim(package_name, m, policy, n_simulations = 10, p=false)
     local counter = 1.0
     local nstep = 0.0
     local rsum = 0.0
+    local n = 0.0
 
     #  while !isterminal(m, s)
     while counter <= n_simulations
@@ -68,6 +69,7 @@ function run_tiger_sim(package_name, m, policy, n_simulations = 10, p=false)
 
         if r != -1
             counter +=1
+            n = 0
             b=initialize_belief(u(policy,m), initialstate(m))
             s = rand(initialstate(m))
         end
@@ -82,7 +84,7 @@ function run_tiger_sim(package_name, m, policy, n_simulations = 10, p=false)
         
         
         
-
+        n+=1
         nstep +=1
     end
 
@@ -138,7 +140,9 @@ function run_tiger_solvers(p=false, n_sim = 1000,n_round=10)
         end
     end
 
-    #CSV.write(pwd()*"/results/tigerProblem.csv", old_df)
+    if p==false && n_sim ==1000
+        CSV.write(pwd()*"/results/tigerProblem.csv", old_df)
+    end
     println("done!")
     #println(old_df)
 end
