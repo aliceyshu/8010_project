@@ -74,6 +74,7 @@ function run_tMaze_sim(package_name, m, policy, n_simulations = 10,p=false)
     local r_total = 0.0
     local counter = 1.0
     local nstep = 0.0
+    local n=0
 
     #  while !isterminal(m, s)
     while counter <= n_simulations
@@ -106,16 +107,17 @@ function run_tMaze_sim(package_name, m, policy, n_simulations = 10,p=false)
         # to avoid this, we set this limitation of stop current game after 1000 steps
         # println(isterminal(m,s))
         #if s == TerminalState() || mod(nstep,1000)==0
-        if isterminal(m,s) == true || mod(nstep,100)==0
+        if isterminal(m,s) == true || n ==100
             counter +=1
             # println(".")
+            n=0
             s = rand(initialstate(m))
             b = initialize_belief(u(policy,m), initialstate(m))
             
         end
         #counter+=1
         
-
+        n+=1
         nstep +=1
         #print(nstep)
     end

@@ -110,8 +110,8 @@ function run_query_solvers(p=false,n_sim=1000,n_round=10)
 
     
     solver_dict = Dict(
-        "POMCP" => POMCPSolver(tree_queries=100),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100),
+        "POMCP" => POMCPSolver(tree_queries=10),
+        "POMCPOW" => POMCPOWSolver(tree_queries=10),
         "QMDP" => QMDPSolver(max_iterations=20,belres=1e-3),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),
@@ -160,4 +160,4 @@ end
 
 # print or not, how many games, repeat for how many times
 # run_query_solvers(true, 10,1)
-# run_query_solvers(false, 1000,10)
+run_query_solvers(false, 1000,10)

@@ -92,8 +92,8 @@ function run_hallway_solvers(p=false, n_sim=1000,n_repeat=10)
 
     m = MiniHallway()
     solver_dict = Dict(
-        "POMCP" => POMCPSolver(tree_queries=100,rng=MersenneTwister(123),default_action=1),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100,default_action=1),
+        "POMCP" => POMCPSolver(tree_queries=10,rng=MersenneTwister(123),default_action=1),
+        "POMCPOW" => POMCPOWSolver(tree_queries=10,default_action=1),
         "QMDP" => QMDPSolver(),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(10, typeof(m) == MiniHallway ? 0.05 : 0.01, false),
@@ -142,4 +142,4 @@ end
 
 
 #run_hallway_solvers(false, 10,1)
-#run_hallway_solvers(false, 1000,10)
+run_hallway_solvers(false, 1000,10)

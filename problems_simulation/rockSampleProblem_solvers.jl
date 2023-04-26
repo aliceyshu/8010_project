@@ -107,8 +107,8 @@ function run_rock_solvers(p=false,n_sim=1000,n_round=10)
 
     
     solver_dict = Dict(
-        "POMCP" => POMCPSolver(tree_queries=100, default_action = 1),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100, default_action = 1),
+        "POMCP" => POMCPSolver(tree_queries=50, default_action = 1),
+        "POMCPOW" => POMCPOWSolver(tree_queries=50, default_action = 1),
         "QMDP" => QMDPSolver(max_iterations=20,belres=1e-3),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),
@@ -171,4 +171,5 @@ function run_rock_solvers(p=false,n_sim=1000,n_round=10)
 end
 
 # print or not, how many games, repeat for how many times
-# run_rock_solvers(false, 1000,10)
+# run_rock_solvers(true, 10,1)
+run_rock_solvers(false, 1000,10)

@@ -26,13 +26,14 @@ using QMDP
 using FIB
 using PointBasedValueIteration
 using SARSOP
-#using IncrementalPruning
+# using IncrementalPruning
 using BasicPOMCP
 using POMCPOW
 using Random
 
 
-#include("../problems/tigerProblem.jl")
+# include("../solvers/IncrementalPruning.jl")
+
 
 # --------------------------simulation-----------------------------
 function run_tiger_sim(package_name, m, policy, n_simulations = 10, p=false)
@@ -99,8 +100,8 @@ function run_tiger_solvers(p=false, n_sim = 1000,n_round=10)
 
 
     solver_dict = Dict(
-        "POMCP" => POMCPSolver(tree_queries=100),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100, criterion=MaxUCB(20.0)),
+        "POMCP" => POMCPSolver(tree_queries=10),
+        "POMCPOW" => POMCPOWSolver(tree_queries=10, criterion=MaxUCB(20.0)),
         "QMDP" => QMDPSolver(),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),
@@ -117,10 +118,8 @@ function run_tiger_solvers(p=false, n_sim = 1000,n_round=10)
             println("round $i")
             
             local m = TigerPOMDP()
-            #local n_states = length(states(m))
             local solver = def_solver
             local policy = solve(solver, m)
-            # print(policy.alphas)
             
             local n_simulations,rsum, r_total,n_step = run_tiger_sim(package_name, m, policy, n_sim,p)
             
@@ -142,10 +141,12 @@ function run_tiger_solvers(p=false, n_sim = 1000,n_round=10)
 
     if p==false && n_sim ==1000
         CSV.write(pwd()*"/results/tigerProblem.csv", old_df)
+    elseif n_sim ==10 
+        println(old_df)
     end
     println("done!")
-    #println(old_df)
 end
 
 # print or not, how many games, repeat for how many times
-# run_tiger_solvers(false, 1000,10)
+# run_tiger_solvers(false, 10,1)
+run_tiger_solvers(false, 1000,10)

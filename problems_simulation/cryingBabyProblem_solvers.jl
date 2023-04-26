@@ -1,18 +1,3 @@
-#=
-using Pkg
-
-Pkg.add("JLD2")
-Pkg.add("DataFrames")
-Pkg.add("CSV")
-Pkg.add("ElectronDisplay")
-Pkg.add("POMDPs")
-
-Pkg.add("QMDP")
-Pkg.add("FIB")
-Pkg.add("PointBasedValueIteration")
-Pkg.add("SARSOP")
-=#
-
 using JLD2
 using DataFrames
 using CSV
@@ -27,7 +12,7 @@ using QMDP
 using FIB
 using PointBasedValueIteration
 using SARSOP
-using IncrementalPruning
+#using IncrementalPruning
 using BasicPOMCP
 using POMCPOW
 using Random
@@ -95,8 +80,8 @@ function run_baby_solvers(p=false,n_sim=1000,n_round=10)
 
 
     solver_dict = Dict(
-        "POMCP" => POMCPSolver(tree_queries=100, rng=MersenneTwister(123)),
-        "POMCPOW" => POMCPOWSolver(tree_queries=100, criterion=MaxUCB(20.0)),
+        "POMCP" => POMCPSolver(tree_queries=10),
+        "POMCPOW" => POMCPOWSolver(tree_queries=10, criterion=MaxUCB(20.0)),
         "QMDP" => QMDPSolver(),
         "FIB" => FIBSolver(),
         "PBVI" => PBVISolver(),
