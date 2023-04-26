@@ -160,4 +160,4 @@ end
 
 # print or not, how many games, repeat for how many times
 # run_query_solvers(true, 10,1)
-run_query_solvers(false, 1000,10)
+# run_query_solvers(false, 1000,10)

@@ -45,13 +45,13 @@ function POMDPs.transition(m::PaintPOMDP, s, a)
     # Paint
     if a == "1"
         if s == states(m)[1]
-            return SparseCat(["NFL-NBL-NPA","NFL-NBL-PA","FL-NBL-PA","FL-BL-NPA"],[1-m.p_correct,m.p_correct,0,0])
+            return SparseCat(["NFL-NBL-NPA","NFL-NBL-PA","FL-NBL-PA","FL-BL-NPA"],[1-m.p_correct,m.p_correct,0.0,0.0])
         elseif s==states(m)[2]
-            return SparseCat(["NFL-NBL-PA"],[1])
+            return SparseCat(["NFL-NBL-PA"],[1.0])
         elseif s==states(m)[3]
-            return SparseCat(["FL-NBL-PA"],[1])
+            return SparseCat(["FL-NBL-PA"],[1.0])
         else
-            return SparseCat(["FL-BL-NPA"],[1])
+            return SparseCat(["FL-BL-NPA"],[1.0])
         end
     # inspect
     elseif a == "2"
@@ -59,14 +59,14 @@ function POMDPs.transition(m::PaintPOMDP, s, a)
             return SparseCat(states(m),[m.p_correct,p2,p2,p2])
         elseif s == states(m)[2]
             return SparseCat(states(m),[p2,m.p_correct,p2,p2])
-        elseif s == states(m)[1]
+        elseif s == states(m)[3]
             return SparseCat(states(m),[p2,p2,m.p_correct,p2])
         else 
             return SparseCat(states(m),[p2,p2,p2,m.p_correct])
         end
     # ship & reject
     else
-        return SparseCat(states(m),[0.5,0,0,0.5])
+        return SparseCat(states(m),[0.5,0.0,0.0,0.5])
     end
 end
 
@@ -76,7 +76,7 @@ function POMDPs.observation(m::PaintPOMDP, action, next_state)
     # 1=non-blemished, 2=blemished
     # paint
     if action == "1"
-        return SparseCat(["1"],[1])
+        return SparseCat(["1"],[1.0])
     # inspect
     elseif action == "2"
         if next_state ==states(m)[1] || next_state ==states(m)[2] || next_state == states(m)[3]
@@ -86,21 +86,21 @@ function POMDPs.observation(m::PaintPOMDP, action, next_state)
         end
     # ship
     elseif action == "3"
-        return SparseCat(["1"],[1])
+        return SparseCat(["1"],[1.0])
     # reject
     else
-        return SparseCat(["1"],[1])
+        return SparseCat(["1"],[1.0])
     end
 end
 
 
-function POMDPs.reward(m::PaintPOMDP, s, a, o)
+function POMDPs.reward(m::PaintPOMDP, s, a)
     if (s == states(m)[2]) && (a == actions(m)[3])
-        reward = 1
+        reward = 1.0
     elseif (s == states(m)[4]) && (a == actions(m)[4])
-        reward = 1
+        reward = 1.0
     else
-        reward =-1
+        reward = -1.0
     end
 
     return reward
@@ -109,7 +109,7 @@ end
 
 function POMDPs.initialstate(m::PaintPOMDP) 
     s = states(m)
-    p = [0.5, 0, 0, 0.5]
+    p = [0.5, 0.0, 0.0, 0.5]
     return SparseCat(s,p)
 end
 

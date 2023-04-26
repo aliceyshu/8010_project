@@ -64,7 +64,6 @@ function run_paint_sim(package_name, m, policy, n_simulations = 10,p=false)
 
         a = action(policy, b)
         s, o, r = @gen(:sp, :o, :r)(m, s, a)
-        r = reward(m,s,a,o)
 
         rsum += r
         d *= discount(m)
@@ -158,6 +157,8 @@ function run_paint_solvers(p=false,n_sim=1000,n_round=10)
     #println(old_df)
 end
 
-# print or not, how many games, repeat for how many times
-run_paint_solvers(true, 10,1)
-#run_paint_solvers(false, 1000,10)
+# test: print or not, how many games, repeat for how many times
+# run_paint_solvers(true, 10,1)
+
+# actual experiment: print or not, how many games, repeat for how many times
+# run_paint_solvers(false, 1000,10)
