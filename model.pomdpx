@@ -7,7 +7,1230 @@
 	<Description> This is a pomdpx file for a partially observable MDP</Description>
 
 
-	<Discount>0.9</Discount>
+	<Discount>0.99</Discount>
 
 
 	<Variable>
+		<StateVar vnamePrev="state0" vnameCurr="state1" fullyObs="false">
+			<NumValues>23</NumValues>
+		</StateVar>
+
+		<ActionVar vname="action">
+			<NumValues>4</NumValues>
+		</ActionVar>
+
+		<ObsVar vname="observation">
+			<NumValues>5</NumValues>
+		</ObsVar>
+
+		<RewardVar vname="reward"/>
+
+	</Variable>
+
+
+	<InitialStateBelief>
+		<CondProb>
+			<Var>state0</Var>
+			<Parent>null</Parent>
+			<Parameter type = "TBL">
+				<Entry>
+					<Instance>s0</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s1</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s2</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s3</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s4</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s5</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s6</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s7</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s8</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s9</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s10</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s11</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s12</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s13</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s14</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s15</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s16</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s17</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s18</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s19</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s20</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s21</Instance>
+					<ProbTable>0.045454545454545456</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>s22</Instance>
+					<ProbTable>0.0</ProbTable>
+				</Entry>
+			</Parameter>
+		</CondProb>
+	</InitialStateBelief>
+
+
+	<StateTransitionFunction>
+		<CondProb>
+			<Var>state1</Var>
+			<Parent>action state0</Parent>
+			<Parameter>
+				<Entry>
+					<Instance>a0 s0 s0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s0 s2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s0 s0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s0 s0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s1 s1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s1 s3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s1 s1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s1 s1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s2 s2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s2 s4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s2 s2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s2 s0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s3 s3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s3 s5</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s3 s3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s3 s1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s4 s4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s4 s6</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s4 s4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s4 s2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s5 s5</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s5 s7</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s5 s5</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s5 s3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s6 s6</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s6 s8</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s6 s6</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s6 s4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s7 s7</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s7 s9</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s7 s7</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s7 s5</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s8 s8</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s8 s10</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s8 s8</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s8 s6</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s9 s9</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s9 s11</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s9 s9</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s9 s7</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s10 s10</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s10 s12</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s10 s10</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s10 s8</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s11 s11</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s11 s13</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s11 s11</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s11 s9</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s12 s12</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s12 s14</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s12 s12</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s12 s10</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s13 s13</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s13 s15</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s13 s13</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s13 s11</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s14 s14</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s14 s16</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s14 s14</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s14 s12</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s15 s15</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s15 s17</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s15 s15</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s15 s13</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s16 s16</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s16 s18</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s16 s16</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s16 s14</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s17 s17</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s17 s19</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s17 s17</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s17 s15</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s18 s18</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s18 s20</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s18 s18</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s18 s16</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s19 s19</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s19 s21</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s19 s19</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s19 s17</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s20 s22</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s20 s20</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s20 s22</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s20 s18</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s21 s22</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s21 s21</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s21 s22</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s21 s19</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>* s22 s22</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+			</Parameter>
+		</CondProb>
+	</StateTransitionFunction>
+
+
+	<ObsFunction>
+		<CondProb>
+			<Var>observation</Var>
+			<Parent>action state1</Parent>
+			<Parameter>
+				<Entry>
+					<Instance>a0 s0 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s0 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s0 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s0 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s1 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s1 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s1 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s1 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s2 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s2 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s2 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s2 o0</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s3 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s3 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s3 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s3 o1</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s4 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s4 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s4 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s4 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s5 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s5 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s5 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s5 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s6 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s6 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s6 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s6 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s7 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s7 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s7 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s7 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s8 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s8 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s8 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s8 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s9 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s9 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s9 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s9 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s10 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s10 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s10 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s10 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s11 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s11 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s11 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s11 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s12 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s12 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s12 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s12 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s13 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s13 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s13 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s13 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s14 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s14 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s14 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s14 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s15 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s15 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s15 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s15 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s16 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s16 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s16 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s16 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s17 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s17 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s17 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s17 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s18 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s18 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s18 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s18 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s19 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s19 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s19 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s19 o2</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s20 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s20 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s20 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s20 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s21 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s21 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s21 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s21 o3</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s22 o4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s22 o4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s22 o4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s22 o4</Instance>
+					<ProbTable>1.0</ProbTable>
+				</Entry>
+			</Parameter>
+		</CondProb>
+	</ObsFunction>
+	<RewardFunction>
+		<Func>
+			<Var>reward</Var>
+			<Parent>action state0</Parent>
+			<Parameter>
+				<Entry>
+					<Instance>a0 s0</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s0</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s0</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s0</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s1</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s1</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s1</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s1</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s2</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s2</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s2</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s2</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s3</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s3</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s3</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s3</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s4</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s4</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s4</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s4</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s5</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s5</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s5</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s5</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s6</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s6</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s6</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s6</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s7</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s7</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s7</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s7</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s8</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s8</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s8</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s8</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s9</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s9</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s9</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s9</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s10</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s10</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s10</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s10</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s11</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s11</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s11</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s11</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s12</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s12</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s12</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s12</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s13</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s13</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s13</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s13</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s14</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s14</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s14</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s14</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s15</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s15</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s15</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s15</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s16</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s16</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s16</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s16</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s17</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s17</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s17</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s17</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s18</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s18</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s18</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s18</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s19</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s19</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s19</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s19</Instance>
+					<ValueTable>0.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s20</Instance>
+					<ValueTable>4.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s20</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s20</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s20</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a0 s21</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a1 s21</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a2 s21</Instance>
+					<ValueTable>4.0</ValueTable>
+				</Entry>
+				<Entry>
+					<Instance>a3 s21</Instance>
+					<ValueTable>-0.1</ValueTable>
+				</Entry>
+			</Parameter>
+		</Func>
+	</RewardFunction>
+
+</pomdpx>
