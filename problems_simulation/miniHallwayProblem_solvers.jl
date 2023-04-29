@@ -142,4 +142,4 @@ end
 
 
 #run_hallway_solvers(false, 10,1)
-run_hallway_solvers(false, 1000,10)
+#run_hallway_solvers(false, 1000,10)

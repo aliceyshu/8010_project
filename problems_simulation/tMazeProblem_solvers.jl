@@ -183,4 +183,4 @@ end
 
 # print or not, how many games, repeat for how many times
 #run_tMaze_solvers(false, 10,1)
-run_tMaze_solvers(false, 1000,10)
+#run_tMaze_solvers(false, 1000,10)

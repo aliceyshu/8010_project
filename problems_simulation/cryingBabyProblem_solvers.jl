@@ -130,5 +130,5 @@ function run_baby_solvers(p=false,n_sim=1000,n_round=10)
 end
 
 # print or not, how many games, repeat for how many times
-run_baby_solvers(true,10,1)
+#run_baby_solvers(true,10,1)
 #run_baby_solvers(false,1000,10)

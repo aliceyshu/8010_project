@@ -149,4 +149,4 @@ end
 
 # print or not, how many games, repeat for how many times
 # run_tiger_solvers(false, 10,1)
-run_tiger_solvers(false, 1000,10)
+# run_tiger_solvers(false, 1000,10)

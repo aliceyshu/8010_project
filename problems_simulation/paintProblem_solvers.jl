@@ -161,5 +161,5 @@ end
 # run_paint_solvers(true, 10,1)
 
 # actual experiment: print or not, how many games, repeat for how many times
-run_paint_solvers(true, 10,1)
+#run_paint_solvers(true, 10,1)
 #run_paint_solvers(false, 1000,10)
