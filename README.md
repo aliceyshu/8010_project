@@ -18,8 +18,7 @@ This study is part of DS8010 -Interactive Learning in Decision Process course pr
 
 We solve the above POMDP problem using the algorithms listed below:
 
-1. Incremental Pruning (IP)*
-2. QMDP
+1. QMDP
 3. Successive Approx-imations of the Reachable Space under Optimal Policies(SARSOP)
 4. Partially Observable Monte Carlo Planning (POMCP)
 5. POMCP with observation widening (POMCPOW)
@@ -28,7 +27,7 @@ We solve the above POMDP problem using the algorithms listed below:
 
 # Outcomes
 
-Results of the experiments can be found in result folder
+Results of the experiments can be found in result folder: [link](https://github.com/aliceyshu/8010_project/blob/main/results/summary_results.ipynb)
 
 # Report
 
@@ -48,8 +47,8 @@ Results of the experiments can be found in result folder
 - [X] Week 5-6 (April 10-23)
   - [X] Prepare the remaining POMDPs problems (simple grid world problem/ maze problem) andevaluate the performance of each algorithm on the selected POMDPs problems
   - [X] Draft the research report (experimental setup, results, conclusions)
-- [ ] Week 7 (April 24-26)
-  - [ ] Review and finalize the research report, submit the research report by thedue date of **April 26**
+- [X] Week 7 (April 24-26)
+  - [X] Review and finalize the research report, submit the research report by thedue date of **April 26**
 
 # Reference
 
