@@ -29,9 +29,7 @@ function run_baby_sim(package_name, m, policy, n_simulations = 10,p=false)
     end
 
     local rsum = 0
-    local b1 = Vector{Float64}()
-    local b2 = Vector{Float64}()
-    local act = Vector{Int64}()
+
 
     # run a simulation of our model using the stepthrough function
     local b = initialize_belief(updater(policy), initialstate(m))
@@ -56,7 +54,7 @@ function run_baby_sim(package_name, m, policy, n_simulations = 10,p=false)
         r_total += d*r
         b = update(u(policy,m), b, a, o)
         
-        if r==-5.0 || r===15.0
+        if r==-5.0 || r==-15.0
             counter +=1
         end
 
@@ -124,10 +122,13 @@ function run_baby_solvers(p=false,n_sim=1000,n_round=10)
 
     if p==false && n_sim ==1000
         CSV.write(pwd()*"/results/cryingBabyProblem.csv", old_df)
+    elseif p==true && n_sim ==10 && n_round ==1
+        println(old_df)
     end
     println("done!")
     #println(old_df)
 end
 
 # print or not, how many games, repeat for how many times
+run_baby_solvers(true,10,1)
 #run_baby_solvers(false,1000,10)

@@ -51,12 +51,12 @@ function POMDPs.transition(m::PaintPOMDP, s, a)
         elseif s==states(m)[3]
             return SparseCat(["FL-NBL-PA"],[1.0])
         else
-            return SparseCat(["FL-BL-NPA"],[1.0])
+            return SparseCat(["NFL-NBL-NPA","NFL-NBL-PA","FL-NBL-PA","FL-BL-NPA"],[0.0, 0.0, m.p_correct,1-m.p_correct])
         end
     # inspect
-    elseif a == "2"
+    elseif a != "2"
         if s == states(m)[1]
-            return SparseCat(states(m),[m.p_correct,p2,p2,p2])
+            return SparseCat(states(m),[m.p_correct,1-m.p_correct,0,0])
         elseif s == states(m)[2]
             return SparseCat(states(m),[p2,m.p_correct,p2,p2])
         elseif s == states(m)[3]
@@ -66,6 +66,7 @@ function POMDPs.transition(m::PaintPOMDP, s, a)
         end
     # ship & reject
     else
+        # restart
         return SparseCat(states(m),[0.5,0.0,0.0,0.5])
     end
 end

@@ -1,4 +1,4 @@
-# Empirical Analysis of Built-In POMDPs.jl Algorithms: A Comparative Study
+# Empirical Analysis with POMDPs.jl Library: A Comparative Study
 
 In this study, we aim to perform an empirical analysis of multiple algorithms using the package [POMDPs.jl](https://github.com/JuliaPOMDP/POMDPs.jl) and examine the performance of each algorithm.
 
