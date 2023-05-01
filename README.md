@@ -27,7 +27,7 @@ We solve the above POMDP problem using the algorithms listed below:
 
 ## Installation
 
-Requires Julia 1.8.1 or newer. To download Julia, go to [julialang.org/downloads](julialang.org/downloads) 
+Requires Julia 1.8.1 or newer. To download Julia, go to [julialang.org/downloads](julialang.org/downloads)
 
 When Julia is installed, open Julia terminal and install the [POMDPs.jl package](https://github.com/JuliaPOMDP/POMDPs.jl) version 0.9.5 or newer using below:
 
@@ -70,7 +70,7 @@ run_tiger_solvers(false, 1000,10)
 
 The code above will then record the experiment result, such as runtime, reward, discounted rewar, etc., for each problem in the **[result](https://github.com/aliceyshu/8010_project/tree/main/results)** folder.
 
-After complete the experiment for all problems. Open jupyter file **[results/summary_results.ipynb](https://github.com/aliceyshu/8010_project/blob/main/results/summary_results.ipynb) **and organize the result into performance matrix and generate types of plots. 
+After complete the experiment for all problems. Open jupyter file **[results/summary_results.ipynb](https://github.com/aliceyshu/8010_project/blob/main/results/summary_results.ipynb) **and organize the result into performance matrix and generate types of plots.
 
 ## Outcomes
 
@@ -80,11 +80,11 @@ An organize performance matrix csv file can be found in: [results/summary.csv](h
 
 ### Grouped bar plot for discounted reward
 
-![1682733966105](image/README/1682733966105.png "Discounted Reward")
+![1682800062101](image/README/1682800062101.png)
 
 ### Grouped Bar plot for runtime
 
-![1682733992909](image/README/1682733992909.png "Runtime")
+![1682800074401](image/README/1682800074401.png)
 
 ## Report
 
