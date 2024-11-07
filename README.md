@@ -113,4 +113,4 @@ An organize performance matrix csv file can be found in: [results/summary.csv](h
 
 # License
 
-[LICENSE.md](https://github.com/aliceyshu/8010_project/LICENSE.md)
+[LICENSE.md](https://github.com/aliceyshu/8010_project/blob/main/LICENSE.md)
